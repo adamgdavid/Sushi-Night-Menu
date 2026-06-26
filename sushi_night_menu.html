@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!--
+  ========================================================================
+  SUSHI NIGHT MENU  —  HOW TO EDIT
+  ------------------------------------------------------------------------
+  All text is live. To change anything, edit the words between the tags
+  in the BODY below:
+    • A dish title  -> the text inside <p class="dish-name">
+    • Ingredients   -> the text inside <p class="dish-ing"> (separate with  ·  )
+    • A movement    -> the .mv-jp (gold + kanji) and .mv-en (cream) lines
+    • Header/footer -> the .chef, .title, .sub, .meta, .cond, .tag blocks
+  Colors and fonts are in the :root variables in the <style> block.
+  To print or save as PDF: open in a browser, Cmd/Ctrl+P, "Save as PDF".
+  ========================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sushi Night</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0908;
+    --cream:#ece4d2;
+    --cream-dim:#bdb4a2;
+    --gold:#c2a04e;
+    --gold-bright:#d8b85f;
+    --rule:#6b5a2e;
+    --sans:'Jost', 'Century Gothic', system-ui, sans-serif;
+    --jp:'Noto Serif JP', serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#000;}
+  body{
+    font-family:var(--sans);
+    color:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    display:flex;justify-content:center;
+    padding:24px;
+  }
+  .card{
+    position:relative;
+    width:100%;max-width:720px;
+    background:
+      radial-gradient(120% 80% at 50% 0%, #14110d 0%, var(--bg) 55%, #060504 100%);
+    overflow:hidden;
+    padding:12px 56px 56px;
+    border:1px solid #1c1813;
+  }
+  /* faint paper texture */
+  .card::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.010) 0 1px, transparent 1px 3px);
+    mix-blend-mode:overlay;opacity:.6;
+  }
+  /* brush kanji watermark */
+  .watermark{
+    position:absolute;right:-30px;top:140px;
+    font-family:var(--jp);font-weight:500;
+    font-size:520px;line-height:.8;
+    color:rgba(180,160,110,.045);
+    pointer-events:none;user-select:none;z-index:0;
+    writing-mode:vertical-rl;letter-spacing:-40px;
+  }
+  .card > *{position:relative;z-index:1;}
+
+  /* seal */
+  .seal{
+    position:absolute;top:48px;right:52px;
+    width:62px;height:62px;border-radius:50%;
+    border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold-bright);font-family:var(--jp);font-size:26px;font-weight:500;
+  }
+
+  /* header */
+  header{text-align:center;margin-bottom:56px;}
+  .chef{color:var(--gold-bright);font-weight:300;font-size:18px;letter-spacing:.55em;margin-bottom:18px;}
+  .title{color:var(--cream);font-weight:200;font-size:62px;letter-spacing:.34em;line-height:1;margin-left:.34em;}
+  .sub{color:var(--gold-bright);font-weight:300;font-size:18px;letter-spacing:.5em;margin-top:22px;}
+  .div-line{width:34px;height:1px;background:var(--gold);margin:24px auto;}
+  .meta{color:var(--cream);font-weight:300;font-size:14px;letter-spacing:.42em;}
+
+  /* movements */
+  .movement{
+    display:grid;grid-template-columns:158px 1fr;
+    align-items:start;margin-bottom:48px;
+  }
+  .mv-jp{color:var(--gold-bright);font-weight:300;font-size:21px;letter-spacing:.16em;white-space:nowrap;}
+  .mv-jp .kanji{font-family:var(--jp);font-weight:300;}
+  .mv-en{color:var(--cream);font-weight:300;font-size:14px;letter-spacing:.34em;margin-top:10px;}
+  .dishes{border-left:1px solid var(--rule);padding-left:34px;}
+  .dish{margin-bottom:22px;}
+  .dish:last-child{margin-bottom:0;}
+  .dish-name{color:var(--cream);font-weight:300;font-size:18px;letter-spacing:.22em;}
+  .dish-ing{color:var(--gold);font-weight:300;font-size:13.5px;letter-spacing:.12em;margin-top:7px;}
+
+  /* footer */
+  .foot-seal{
+    width:30px;height:30px;border-radius:50%;
+    border:1px solid var(--gold);margin:8px auto 26px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-family:var(--jp);font-size:13px;
+  }
+  .cond{text-align:center;line-height:2;}
+  .cond .c1{color:var(--cream);font-weight:300;font-size:14px;letter-spacing:.34em;}
+  .cond .c2{color:var(--gold);font-weight:300;font-size:13px;letter-spacing:.26em;}
+  .tag{text-align:center;margin-top:46px;color:var(--gold-bright);font-weight:300;font-size:13px;letter-spacing:.34em;line-height:2.1;}
+
+  @media (max-width:560px){
+    .card{padding:44px 26px 40px;}
+    .title{font-size:38px;}
+    .movement{grid-template-columns:1fr;}
+    .dishes{border-left:none;padding-left:0;margin-top:20px;}
+    .watermark{font-size:340px;}
+  }
+  @media print{
+    body{padding:0;}
+    .card{border:none;max-width:none;}
+    @page{margin:0;}
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="watermark">寿</div>
+    <div class="seal">寿</div>
+
+    <header>
+      <p class="chef">CHEF ADAM</p>
+      <h1 class="title">KACEES SUSHI NIGHT</h1>
+      <p class="sub">JUNE 26TH 2026</p>
+      <div class="div-line"></div>
+      <p class="meta">8 GUESTS &nbsp;&middot;&nbsp; FOUR MOVEMENTS</p>
+    </header>
+
+    <section class="movement">
+      <div class="label">
+        <p class="mv-jp">ICHI <span style="color:var(--rule)">|</span> <span class="kanji">&#20919;&#33756;</span></p>
+        <p class="mv-en">FIRST TASTE</p>
+      </div>
+      <div class="dishes">
+        <div class="dish"><p class="dish-name">SUNOMONO</p><p class="dish-ing">summer cucumber &middot; toasted sesame &middot; rice vinegar</p></div>
+        <div class="dish"><p class="dish-name">AHI MAGURO</p><p class="dish-ing">ponzu &middot; yuzu kosho &middot; big sur sea salt</p></div>
+        <div class="dish"><p class="dish-name">HAMACHI CRUDO</p><p class="dish-ing">ponzu &middot; serrano &middot; Plout</p></div>
+      </div>
+    </section>
+
+    <section class="movement">
+      <div class="label">
+        <p class="mv-jp">NI <span style="color:var(--rule)">|</span> <span class="kanji">&#24059;&#29289;</span></p>
+        <p class="mv-en">MAKI</p>
+      </div>
+      <div class="dishes">
+        <div class="dish"><p class="dish-name">NEGI-TORO</p><p class="dish-ing">toro &middot; scallion &middot; unagi sauce</p></div>
+        <div class="dish"><p class="dish-name">RAINBOW</p><p class="dish-ing">maguro &middot; sake &middot; hamachi &middot; avocado &middot; ponzu</p></div>
+        <div class="dish"><p class="dish-name">MIDNIGHT</p><p class="dish-ing">spiced maguro &middot; cucumber &middot; spiced macadamia &middot; unagi</p></div>
+        <div class="dish"><p class="dish-name">GARDEN</p><p class="dish-ing">cucumber &middot; avocado &middot; shiso &middot; sesame dressing</p></div>
+      </div>
+    </section>
+
+    <section class="movement">
+      <div class="label">
+        <p class="mv-jp">SAN <span style="color:var(--rule)">|</span> <span class="kanji">&#25569;&#12426;</span></p>
+        <p class="mv-en">NIGIRI</p>
+      </div>
+      <div class="dishes">
+        <div class="dish"><p class="dish-name">MAGURO</p><p class="dish-ing">yuzu kosho &middot; big sur sea salt</p></div>
+        <div class="dish"><p class="dish-name">TORCHED SAKE</p><p class="dish-ing">honey &middot; meyer lemon zest</p></div>
+        <div class="dish"><p class="dish-name">HAMACHI</p><p class="dish-ing">ponzu &middot; serrano &middot; shiso</p></div>
+        <div class="dish"><p class="dish-name">TORO</p><p class="dish-ing">ryu &middot; meyer lemon oil &middot; ikura</p></div>
+      </div>
+    </section>
+
+    <section class="movement">
+      <div class="label">
+        <p class="mv-jp">YON <span style="color:var(--rule)">|</span> <span class="kanji">&#30001;&#23614;</span></p>
+        <p class="mv-en">DESSERT</p>
+      </div>
+      <div class="dishes">
+        <div class="dish"><p class="dish-name">MATCHA TIRAMISU</p><p class="dish-ing">green tea &middot; mascarpone &middot; biscotti</p></div>
+      </div>
+    </section>
+
+    <div class="foot-seal">&#23551;</div>
+<div class="tag">
+      A BIRTHDAY TO REMEMBER.<br>
+      MADE WITH INTENTION. SHARED WITH LOVE.
+    </div>
+    <div style="text-align:center;margin-top:36px;color:var(--cream-dim);font-weight:300;font-size:11.5px;letter-spacing:.28em;line-height:2.2;">
+      SOURCED FROM<br>
+      DIRTY GIRL PRODUCE &nbsp;&middot;&nbsp; PINNACLE FARM &nbsp;&middot;&nbsp; FOUR SISTERS FARM<br>
+      SEA TO SKY FARM &nbsp;&middot;&nbsp; LIVE EARTH FARM
+    </div>
+  </div>
+</body>
+</html>
